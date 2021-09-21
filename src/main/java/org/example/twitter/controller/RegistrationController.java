@@ -2,7 +2,7 @@ package org.example.twitter.controller;
 
 import org.example.twitter.domain.Role;
 import org.example.twitter.domain.User;
-import org.example.twitter.repos.UserRepo;
+import org.example.twitter.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

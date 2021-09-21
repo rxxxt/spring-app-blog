@@ -1,4 +1,4 @@
-package org.example.twitter.repos;
+package org.example.twitter.repository;
 
 import org.example.twitter.domain.Message;
 import org.springframework.data.repository.CrudRepository;

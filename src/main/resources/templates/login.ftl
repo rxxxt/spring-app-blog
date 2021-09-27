@@ -5,7 +5,7 @@
 Login page
 <@l.login "/login" />
 <a href="/registration">Add new user</a>
-<#if Session.SPRING_SECURITY_LAST_EXCEPTION??>
-    <div>Invalid username or password</div>
-</#if>
+<#--<#if Session.SPRING_SECURITY_LAST_EXCEPTION??>-->
+<#--    <div>Invalid username or password</div>-->
+<#--</#if>-->
 </@c.page>

@@ -1,6 +1,6 @@
-package org.example.twitter.repository;
+package org.example.myblog.repository;
 
-import org.example.twitter.domain.User;
+import org.example.myblog.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepo extends JpaRepository<User, Long> {

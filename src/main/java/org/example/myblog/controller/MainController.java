@@ -1,8 +1,8 @@
-package org.example.twitter.controller;
+package org.example.myblog.controller;
 
-import org.example.twitter.domain.Message;
-import org.example.twitter.domain.User;
-import org.example.twitter.repository.MessageRepo;
+import org.example.myblog.domain.Message;
+import org.example.myblog.domain.User;
+import org.example.myblog.repository.MessageRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

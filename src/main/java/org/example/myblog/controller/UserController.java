@@ -1,8 +1,8 @@
-package org.example.twitter.controller;
+package org.example.myblog.controller;
 
-import org.example.twitter.domain.Role;
-import org.example.twitter.domain.User;
-import org.example.twitter.repository.UserRepo;
+import org.example.myblog.domain.Role;
+import org.example.myblog.domain.User;
+import org.example.myblog.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;

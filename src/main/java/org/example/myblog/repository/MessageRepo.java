@@ -1,6 +1,6 @@
-package org.example.twitter.repository;
+package org.example.myblog.repository;
 
-import org.example.twitter.domain.Message;
+import org.example.myblog.domain.Message;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

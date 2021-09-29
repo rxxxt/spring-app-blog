@@ -1,6 +1,6 @@
-package org.example.twitter.service;
+package org.example.myblog.service;
 
-import org.example.twitter.repository.UserRepo;
+import org.example.myblog.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

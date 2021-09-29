@@ -1,6 +1,6 @@
-package org.example.twitter.config;
+package org.example.myblog.config;
 
-import org.example.twitter.service.UserService;
+import org.example.myblog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

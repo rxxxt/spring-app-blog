@@ -1,4 +1,4 @@
-package org.example.twitter.domain;
+package org.example.myblog.domain;
 
 import org.springframework.security.core.GrantedAuthority;
 

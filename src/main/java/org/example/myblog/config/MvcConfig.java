@@ -1,4 +1,4 @@
-package org.example.twitter.config;
+package org.example.myblog.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;

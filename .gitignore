@@ -25,6 +25,9 @@ hs_err_pid*
 # temp
 .DS_Store
 
+# folders
+uploads/
+
 # IDE
 target/
 .idea

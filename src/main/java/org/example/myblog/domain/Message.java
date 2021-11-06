@@ -1,11 +1,17 @@
 package org.example.myblog.domain;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 public class Message {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
+
+    @NotBlank(message = "Please fill the massage")
+    @Length(max = 2048, message = "Message too long")
     private String text;
     private String tag;
 

@@ -1,4 +1,4 @@
-# Compiled class file
+a# Compiled class file
 *.class
 
 # Log file
@@ -31,6 +31,7 @@ uploads/
 # IDE
 target/
 .idea
+*.iml
 .vscode
 CMakeLists.txt
 cmake-build-debug

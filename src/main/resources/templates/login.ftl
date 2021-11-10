@@ -8,7 +8,7 @@
         </div>
     </#if>
     <#if message??>
-        <div class="aert alert-${messageType}" role="alert">
+        <div class="alert alert-${messageType}" role="alert">
             ${message}
         </div>
     </#if>

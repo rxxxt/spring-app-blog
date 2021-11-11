@@ -3,7 +3,7 @@
 
 <@c.page>
     <#if Session?? && Session.SPRING_SECURITY_LAST_EXCEPTION??>
-        <div class="aert alert-danger" role="alert">
+        <div class="alert alert-danger" role="alert">
             ${Session.SPRING_SECURITY_LAST_EXCEPTION.message}
         </div>
     </#if>

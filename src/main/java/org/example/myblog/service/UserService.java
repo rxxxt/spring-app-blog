@@ -19,7 +19,7 @@ public class UserService implements UserDetailsService {
     private UserRepository userRepo;
 
     @Autowired
-    private MailSendler mailSendler;
+    private MailSender mailSender;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -61,7 +61,7 @@ public class UserService implements UserDetailsService {
                     user.getUsername(),
                     user.getActivationCode()
             );
-            mailSendler.send(user.getEmail(), "Activation code", message);
+            mailSender.send(user.getEmail(), "Activation code", message);
         }
     }
 

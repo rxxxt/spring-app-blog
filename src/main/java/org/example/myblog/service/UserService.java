@@ -2,7 +2,7 @@ package org.example.myblog.service;
 
 import org.example.myblog.domain.Role;
 import org.example.myblog.domain.User;
-import org.example.myblog.repository.UserRepo;
+import org.example.myblog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @Service
 public class UserService implements UserDetailsService {
     @Autowired
-    private UserRepo userRepo;
+    private UserRepository userRepo;
 
     @Autowired
     private MailSendler mailSendler;

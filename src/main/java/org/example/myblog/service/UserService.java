@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @Service
 public class UserService implements UserDetailsService {
     @Autowired
-    private UserRepository userRepo;
+    private UserRepository userRepository;
 
     @Autowired
     private MailSender mailSender;
@@ -26,7 +26,7 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepo.findByUsername(username);
+        User user = userRepository.findByUsername(username);
 
         if (user == null) {
             throw new UsernameNotFoundException("Use not found");
@@ -36,7 +36,7 @@ public class UserService implements UserDetailsService {
     }
 
     public boolean addUser(User user) {
-        User userFromDb = userRepo.findByUsername(user.getUsername());
+        User userFromDb = userRepository.findByUsername(user.getUsername());
 
         if (userFromDb != null) {
             return false;
@@ -46,7 +46,7 @@ public class UserService implements UserDetailsService {
         user.setActivationCode(UUID.randomUUID().toString());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-        userRepo.save(user);
+        userRepository.save(user);
 
         sendMessage(user);
 
@@ -66,7 +66,7 @@ public class UserService implements UserDetailsService {
     }
 
     public boolean activateUser(String code) {
-        User user = userRepo.findByActivationCode(code);
+        User user = userRepository.findByActivationCode(code);
 
         if (user == null) {
             return false;
@@ -74,13 +74,13 @@ public class UserService implements UserDetailsService {
 
         user.setActivationCode(null);
 
-        userRepo.save(user);
+        userRepository.save(user);
 
         return true;
     }
 
     public List<User> findAll() {
-        return userRepo.findAll();
+        return userRepository.findAll();
     }
 
     public void saveUser(User user, String username, Map<String, String> form) {
@@ -98,7 +98,7 @@ public class UserService implements UserDetailsService {
             }
         }
 
-        userRepo.save(user);
+        userRepository.save(user);
     }
 
     public void updateProfile(User user, String password, String email) {
@@ -117,7 +117,7 @@ public class UserService implements UserDetailsService {
                 user.setPassword(password);
             }
 
-            userRepo.save(user);
+            userRepository.save(user);
 
             if (isEmailChanged) {
                 sendMessage(user);
@@ -128,12 +128,12 @@ public class UserService implements UserDetailsService {
     public void subscribe(User currentUser, User user) {
         user.getSubscribers().add(currentUser);
 
-        userRepo.save(user);
+        userRepository.save(user);
     }
 
     public void unsubscribe(User currentUser, User user) {
         user.getSubscribers().remove(currentUser);
 
-        userRepo.save(user);
+        userRepository.save(user);
     }
 }

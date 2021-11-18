@@ -66,6 +66,7 @@ public class MessageController {
             @Valid Message message,
             BindingResult bindingResult,
             Model model,
+            @PageableDefault(sort = { "id" }, direction = Sort.Direction.DESC) Pageable pageable,
             @RequestParam("file") MultipartFile file
     ) throws IOException {
         message.setAuthor(user);
@@ -83,9 +84,10 @@ public class MessageController {
             messageRepository.save(message);
         }
 
-        Iterable<Message> messages = messageRepository.findAll();
+        Page<MessageDto> page = messageService.messageList(pageable, "", user);
 
-        model.addAttribute("messages", messages);
+        model.addAttribute("page", page);
+        model.addAttribute("url", "/main");
 
         return "main";
     }

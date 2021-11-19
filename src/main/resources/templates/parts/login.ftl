@@ -31,11 +31,11 @@
                 <label class="col-sm-2 col-form-label">Password:</label>
                 <div class="col-sm-6">
                     <input type="password" name="password2"
-                           class="form-control ${(password2Error??)?string('is-invalid', '')}"
+                           class="form-control ${(passwordError??)?string('is-invalid', '')}"
                            placeholder="Retype password" />
-                    <#if password2Error??>
+                    <#if passwordError??>
                         <div class="invalid-feedback">
-                            ${password2Error}
+                            ${passwordError}
                         </div>
                     </#if>
                 </div>

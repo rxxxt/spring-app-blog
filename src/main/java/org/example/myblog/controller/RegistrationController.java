@@ -3,7 +3,6 @@ package org.example.myblog.controller;
 import org.example.myblog.domain.User;
 import org.example.myblog.domain.dto.CaptchaResponseDto;
 import org.example.myblog.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,14 +21,20 @@ import java.util.Map;
 public class RegistrationController {
     private final static String CAPTCHA_URL = "https://www.google.com/recaptcha/api/siteverify?secret=%s&response=%s";
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
-    @Value("${recaptcha.secret}")
-    private String secret;
+    private final String secret;
 
-    @Autowired
-    private RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
+
+    public RegistrationController(
+            UserService userService,
+            @Value("${recaptcha.secret}") String secret,
+            RestTemplate restTemplate) {
+        this.userService = userService;
+        this.secret = secret;
+        this.restTemplate = restTemplate;
+    }
 
     @GetMapping("/registration")
     public String registration() {
@@ -47,20 +52,18 @@ public class RegistrationController {
         String url = String.format(CAPTCHA_URL, secret, captchaResponse);
         CaptchaResponseDto response = restTemplate.postForObject(url, Collections.emptyList(), CaptchaResponseDto.class);
 
-        if (!response.isSuccess()) {
+        if (!response.isSuccess())
             model.addAttribute("captchaError", "Fill captcha");
-        }
 
         boolean isConfirmEmpty = passwordConfirm.isEmpty();
-        if (isConfirmEmpty) {
-            model.addAttribute("passwordError", "Password confirmation cannot ve empty");
-        }
 
+        if (isConfirmEmpty)
+            model.addAttribute("passwordError", "Password confirmation cannot ve empty");
 
         boolean isPasswordsDifferent = user.getPassword() != null && !user.getPassword().equals(passwordConfirm);
-        if (isPasswordsDifferent) {
+
+        if (isPasswordsDifferent)
             model.addAttribute("passwordError", "Passwords are different!");
-        }
 
         if (isConfirmEmpty || isPasswordsDifferent || bindingResult.hasErrors() || !response.isSuccess()) {
             Map<String, String> errors = ControllerUtils.getErrors(bindingResult);

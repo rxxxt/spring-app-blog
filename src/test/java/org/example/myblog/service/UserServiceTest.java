@@ -3,6 +3,7 @@ package org.example.myblog.service;
 import org.example.myblog.domain.Role;
 import org.example.myblog.domain.User;
 import org.example.myblog.repository.UserRepository;
+import org.example.myblog.service.impl.MailSender;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Test;

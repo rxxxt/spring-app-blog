@@ -4,8 +4,7 @@ import org.example.myblog.domain.Message;
 import org.example.myblog.domain.User;
 import org.example.myblog.domain.dto.MessageDto;
 import org.example.myblog.repository.MessageRepository;
-import org.example.myblog.service.MessageService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.example.myblog.service.impl.MessageService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -30,14 +29,21 @@ import java.util.UUID;
 
 @Controller
 public class MessageController {
-    @Autowired
-    private MessageRepository messageRepository;
 
-    @Autowired
-    private MessageService messageService;
+    private final MessageRepository messageRepository;
 
-    @Value("${upload.path}")
-    private String uploadPath;
+    private final MessageService messageService;
+
+    private final String uploadPath;
+
+    public MessageController(
+            MessageRepository messageRepository,
+            MessageService messageService,
+            @Value("${upload.path}") String uploadPath) {
+        this.messageRepository = messageRepository;
+        this.messageService = messageService;
+        this.uploadPath = uploadPath;
+    }
 
     @GetMapping("/")
     public String greeting(Map<String, Object> model) {
@@ -96,9 +102,8 @@ public class MessageController {
         if (file != null && !file.getOriginalFilename().isEmpty()) {
             File uploadDir = new File(uploadPath);
 
-            if (!uploadDir.exists()) {
+            if (!uploadDir.exists())
                 uploadDir.mkdir();
-            }
 
             String uuidFile = UUID.randomUUID().toString();
             String resultFilename = uuidFile + "." + file.getOriginalFilename();
@@ -141,13 +146,11 @@ public class MessageController {
             @RequestParam("file") MultipartFile file
     ) throws IOException {
         if (message.getAuthor().equals(currentUser)) {
-            if (!text.isEmpty()) {
+            if (!text.isEmpty())
                 message.setText(text);
-            }
 
-            if (!tag.isEmpty()) {
+            if (!tag.isEmpty())
                 message.setTag(tag);
-            }
 
             saveFile(message, file);
 
@@ -165,11 +168,10 @@ public class MessageController {
     ) {
         Set<User> likes = message.getLikes();
 
-        if (likes.contains(currentUser)) {
+        if (likes.contains(currentUser))
             likes.remove(currentUser);
-        } else {
+        else
             likes.add(currentUser);
-        }
 
         UriComponents components = UriComponentsBuilder.fromHttpUrl(referer).build();
 

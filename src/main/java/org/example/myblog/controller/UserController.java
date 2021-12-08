@@ -3,7 +3,6 @@ package org.example.myblog.controller;
 import org.example.myblog.domain.Role;
 import org.example.myblog.domain.User;
 import org.example.myblog.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -15,8 +14,12 @@ import java.util.Map;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-    @Autowired
-    private UserService userService;
+
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @PreAuthorize("hasAnyAuthority('ADMIN')")
     @GetMapping
@@ -92,11 +95,10 @@ public class UserController {
         model.addAttribute("userChannel", user);
         model.addAttribute("type", type);
 
-        if ("subscriptions".equals(type)) {
+        if ("subscriptions".equals(type))
             model.addAttribute("users", user.getSubscriptions());
-        } else {
+        else if ("subscribers".equals(type))
             model.addAttribute("users", user.getSubscribers());
-        }
 
         return "subscriptions";
     }
